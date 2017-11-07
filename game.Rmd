@@ -1,0 +1,87 @@
+---
+title: "Forschungsprojekt"
+subtitle: "Ersetze Statistik Software mit Personen vom Institut"
+output: ioslides_presentation
+---
+
+```{r setup, echo=FALSE}
+library('ggplot2')
+library('knitr')
+opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+
+## Neues Forschungsprojekt
+
+Anstelle des bewährten Maximum Likelihood Schätzer testen wir heute den Maximum Bauchgefühl Schätzer. 
+
+## 
+
+![](http://thumbpress.com/wp-content/uploads/2013/05/I-Have-No-Idea-What-Im-Doing-1.jpg)
+
+
+# Test 1: Wie viel Prozent der Symbole sind rote Dreiecke?
+
+## 
+
+```{r}
+
+simulate.points = function(n, p, seed = 42, size = 3){
+  set.seed(seed)
+  points = data.frame(
+    x = runif(n),
+    y = runif(n),
+    color = factor(sample(c(0,1), size = n, replace=TRUE, prob = c(1-p, p))))
+  
+  
+  p = ggplot(points) + 
+    geom_point(aes(x=x, y=y, color = color, shape= color), size = size) + 
+    theme_void() + 
+    scale_color_manual(guide = 'none', values = c('blue', 'red')) + 
+    scale_shape_discrete(guide = 'none')
+  print(p)
+  return(mean(points$color == 1))
+}
+
+```
+
+
+```{r}
+# simulate 
+p = simulate.points(20, 0.1)
+```
+
+## Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * p, '%') `
+
+
+## 
+
+```{r}
+p = simulate.points(100, 0.01) 
+```
+
+## Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * p, '%') `
+
+
+## 
+```{r}
+p = simulate.points(2000, 0.99)
+```
+
+## Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * p, '%') `
+
+
+
+
+
+
+
+
+
+
