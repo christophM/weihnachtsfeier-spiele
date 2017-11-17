@@ -1,9 +1,11 @@
 ---
 title: "Forschungsprojekt"
-subtitle: "Ersetze Statistik Software mit Personen vom Institut"
+subtitle: Ersetze Statistik Software mit Personen vom Institut
 output:
   ioslides_presentation:
-    incremental: true
+    incremental: yes
+  slidy_presentation:
+    incremental: yes
 ---
 
 ```{r setup, echo=FALSE}
@@ -163,4 +165,9 @@ numbers =get.max.game.numbers(maxim)
 * `r numbers[2]`
 
 * `r numbers[3]`
+
+
+## Guess the correlation
+
+http://guessthecorrelation.com/
 
