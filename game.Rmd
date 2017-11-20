@@ -1,11 +1,8 @@
 ---
 title: "Forschungsprojekt"
-subtitle: Ersetze Statistik Software mit Personen vom Institut
 output:
   ioslides_presentation:
-    incremental: yes
-  slidy_presentation:
-    incremental: yes
+    css: styles.css
 ---
 
 ```{r setup, echo=FALSE}
@@ -14,18 +11,17 @@ library('knitr')
 opts_chunk$set(echo = FALSE, warning = FALSE)
 ```
 
-
-## TODO: Bild mit Computer
-
-## TODO: Bild: Computer durgestrichen und ersetzt mit Meschnen
-
-## Neues Forschungsprojekt
-
-Anstelle des bewährten Maximum Likelihood Schätzer testen wir heute den Maximum Bauchgefühl Schätzer. 
+# Wir suchen Versuchspersonen (2 Teams)
 
 ## 
+![](./images/computer.png)
 
-![](http://thumbpress.com/wp-content/uploads/2013/05/I-Have-No-Idea-What-Im-Doing-1.jpg)
+## 
+![](./images/human.jpg)
+
+## Forschungsfrage
+
+Können wir anstelle des bewährten Maximum Likelihood Schätzer testen wir auch den Maximum Bauchgefühl Schätzer einsetzen?
 
 
 # Test 1: Wie viel Prozent der Symbole sind rote Dreiecke?
@@ -36,14 +32,11 @@ Anstelle des bewährten Maximum Likelihood Schätzer testen wir heute den Maximu
 
 simulate.points = function(n, p, seed = 42){
   set.seed(seed)
-  points = data.frame(
+  data.frame(
     x = runif(n),
     y = runif(n),
     color = factor(sample(c(0,1), size = n, replace=TRUE, prob = c(1-p, p))))
-  
 }
-  return()
-
 plot.points = function(points, size = 3){
   p = ggplot(points) + 
     geom_point(aes(x=x, y=y, color = color, shape= color), size = size) + 
@@ -61,7 +54,8 @@ points = simulate.points(20, 0.1)
 plot.points(points)
 ```
 
-## Zeit ist um!
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
 
 ## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
 ```{r}
@@ -75,7 +69,23 @@ points = simulate.points(100, 0.01)
 plot.points(points)
 ```
 
-## Zeit ist um!
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+```{r}
+plot.points(points)
+```
+
+
+## 
+```{r}
+points = simulate.points(200, 0.42)
+plot.points(points)
+```
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
 
 ## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
 ```{r}
@@ -88,7 +98,8 @@ points = simulate.points(2000, 0.99)
 plot.points(points)
 ```
 
-## Zeit ist um!
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
 
 ## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
 ```{r}
@@ -101,12 +112,18 @@ plot.points(points)
 
 # Test 2: Wie lautet der höchste Wert?
 
-## Finde das Maximum {.build}
+## Finde das Maximum 
+
+Wir ziehen 5 Zahlen zwischen 0 und unbekanntem Höchstwert.
+Aufgabe: Versucht herauszufinden was der höchste Wert ist. 
+
+Beispiel: Unbekannter höchster Wert ist 10. 
+Gezeigte Zahlen: 1, 6, 2, 3, 8
 
 
 ```{r}
 set.seed(42)
-get.max.game.numbers = function(maxim, min=0, n=3, sort.numbers=TRUE){
+get.max.game.numbers = function(maxim, min=0, n=5, sort.numbers=FALSE){
    numbers = sample(min:maxim, size=n, replace=FALSE)
    if(sort.numbers){
      numbers = sort(numbers)
@@ -117,20 +134,22 @@ maxim = 7
 numbers =get.max.game.numbers(maxim)
 ```
 
-* `r numbers[1]`
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
 
-* `r numbers[2]`
-
-* `r numbers[3]`
-
-
-## Zeit ist um!
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
 
 ## Antwort: `r maxim`
 
-* `r numbers[1]`
-* `r numbers[2]`
-* `r numbers[3]`
+- `r numbers[1]`
+- `r numbers[2]`
+- `r numbers[3]`
+- `r numbers[4]`
+- `r numbers[5]`
 
 ## Finde das Maximum {.build}
 
@@ -140,45 +159,73 @@ numbers =get.max.game.numbers(maxim)
 ```
 
 
-* `r numbers[1]`
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
 
-* `r numbers[2]`
-
-* `r numbers[3]`
 
 
-
-## Zeit ist um!
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
 
 ## Antwort: `r maxim`
 
-* `r numbers[1]`
-* `r numbers[2]`
-* `r numbers[3]`
+- `r numbers[1]`
+- `r numbers[2]`
+- `r numbers[3]`
+- `r numbers[4]`
+- `r numbers[5]`
 
-## Finde das Maximum {.build}
+## Finde das Maximum
 
 ```{r}
 maxim = 2017
 numbers =get.max.game.numbers(maxim)
 ```
 
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: `r maxim`
+
+- `r numbers[1]`
+- `r numbers[2]`
+- `r numbers[3]`
+- `r numbers[4]`
+- `r numbers[5]`
+
+
+```{r}
+maxim = 1345678L
+numbers =get.max.game.numbers(maxim)
+```
 
 # `r numbers[1]`
 # `r numbers[2]`
-
 # `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: `r maxim`
+
+- `r numbers[1]`
+- `r numbers[2]`
+- `r numbers[3]`
+- `r numbers[4]`
+- `r numbers[5]`
 
 
-## Guess the correlation
 
-http://guessthecorrelation.com/
-
-
-## Test
-
-- test1
-    - test2
-    - test3
-- test4
-
+#  {.emphasized .flexbox .vcenter}
+Menschen sind zu langsam. 
