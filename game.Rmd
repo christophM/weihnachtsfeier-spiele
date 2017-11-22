@@ -21,12 +21,11 @@ opts_chunk$set(echo = FALSE, warning = FALSE)
 
 ## {.emphasizedabit}
 
-Können wir anstelle des bewährten Maximum Likelihood Schätzer testen wir auch den Maximum Bauchgefühl Schätzer einsetzen?
+Der Maximum Bauchgefühl Schätzer
 
 
 # Test 1: Wie viel Prozent der Symbole sind rote Dreiecke?
 
-## 
 
 ```{r}
 
@@ -37,32 +36,33 @@ simulate.points = function(n, p, seed = 42){
     y = runif(n),
     color = factor(sample(c(0,1), size = n, replace=TRUE, prob = c(1-p, p))))
 }
-plot.points = function(points, size = 3){
+plot.points = function(points, size = 5, random.size = FALSE){
+  
+  if(random.size){
+    size = rpois(nrow(points), 7)
+  } 
+  points$size = size
+
   p = ggplot(points) + 
-    geom_point(aes(x=x, y=y, color = color, shape= color), size = size) + 
+    geom_point(aes(x=x, y=y, color = color, shape= color, size = size)) + 
     theme_void() + 
     scale_color_manual(guide = 'none', values = c('blue', 'red')) + 
-    scale_shape_discrete(guide = 'none')
-  print(p)
+    scale_shape_discrete(guide = 'none') + 
+    scale_size_identity(guide='none')
+  return(p)
 }
-```
-
-
-```{r}
 # simulate 
 points = simulate.points(20, 0.1)
-plot.points(points)
 ```
 
-## {.emphasized .flexbox .vcenter}
-Die Zeit ist um!
 
-## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+## Beispiel:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
 ```{r}
+# simulate 
 plot.points(points)
 ```
 
-## 
+## Runde 1
 
 ```{r}
 points = simulate.points(100, 0.01) 
@@ -78,7 +78,7 @@ plot.points(points)
 ```
 
 
-## 
+## Runde 2
 ```{r}
 points = simulate.points(200, 0.42)
 plot.points(points)
@@ -92,9 +92,9 @@ Die Zeit ist um!
 plot.points(points)
 ```
 
-## 
+## Runde 3
 ```{r}
-points = simulate.points(2000, 0.99)
+points = simulate.points(1000, 0.94)
 plot.points(points)
 ```
 
@@ -105,6 +105,39 @@ Die Zeit ist um!
 ```{r}
 plot.points(points)
 ```
+
+
+## Runde 4
+```{r}
+points = simulate.points(1000, 0.94)
+plot.points(points)
+```
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+```{r}
+plot.points(points)
+```
+
+
+
+## Runde 5
+```{r}
+points = simulate.points(50, 0.1)
+p = plot.points(points,random.size = TRUE)
+p
+```
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+```{r}
+p
+```
+
 
 # Test 2: Malen nach Tönen
 
