@@ -19,7 +19,7 @@ opts_chunk$set(echo = FALSE, warning = FALSE)
 ## 
 ![](./images/human.jpg)
 
-## Forschungsfrage
+## {.emphasizedabit}
 
 Können wir anstelle des bewährten Maximum Likelihood Schätzer testen wir auch den Maximum Bauchgefühl Schätzer einsetzen?
 
@@ -130,7 +130,7 @@ get.max.game.numbers = function(maxim, min=0, n=5, sort.numbers=FALSE){
    }
    numbers
 }
-maxim = 7
+maxim = 15
 numbers =get.max.game.numbers(maxim)
 ```
 
@@ -143,7 +143,7 @@ numbers =get.max.game.numbers(maxim)
 ## {.emphasized .flexbox .vcenter}
 Die Zeit ist um!
 
-## Antwort: `r maxim`
+## Antwort: `r maxim`, die Anzahl an Sektflaschen für die Weihnachtsfeier
 
 - `r numbers[1]`
 - `r numbers[2]`
@@ -154,7 +154,7 @@ Die Zeit ist um!
 ## Finde das Maximum {.build}
 
 ```{r}
-maxim = 42
+maxim = 60 
 numbers =get.max.game.numbers(maxim)
 ```
 
@@ -170,7 +170,7 @@ numbers =get.max.game.numbers(maxim)
 ## {.emphasized .flexbox .vcenter}
 Die Zeit ist um!
 
-## Antwort: `r maxim`
+## Antwort: `r maxim`, die Anzahl an Brezn für die Feier
 
 - `r numbers[1]`
 - `r numbers[2]`
@@ -204,7 +204,7 @@ Die Zeit ist um!
 
 
 ```{r}
-maxim = 1345678L
+maxim = 5000000L
 numbers =get.max.game.numbers(maxim)
 ```
 
@@ -217,7 +217,7 @@ numbers =get.max.game.numbers(maxim)
 ## {.emphasized .flexbox .vcenter}
 Die Zeit ist um!
 
-## Antwort: `r maxim`
+## Antwort: `r maxim`, Leberkäse in Milligram
 
 - `r numbers[1]`
 - `r numbers[2]`
