@@ -3,11 +3,11 @@ library(tuneR)
 supp = seq(1,7, length.out = 100)
 
 ex = (seq(1, 7, length.out = 100)^1.25*sin(seq(1, 7, length.out = 100)*1.5) -
-  (seq(1,7,length.out = 100)-1)^1.05*2) * .05 + 2.32
+  (seq(1,7,length.out = 100)-1)^1.05*2) * .02 + 2.32
 
 # plot(supp, ex, type = "l")
 
-list = lapply(ex, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(ex, function(x) sine(x*440+220, duration = .1, xunit = "time"))
 
 ex.wav = do.call(bind, list)
 
@@ -62,7 +62,7 @@ step.const = function(x) {
   } else if(x>4 & x  <= 6) {
     3
   } else {
-    1
+    1.75
   }
 }
 

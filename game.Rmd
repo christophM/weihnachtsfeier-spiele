@@ -219,7 +219,7 @@ Your browser does not support the audio element.
 ## Task 3
 
 ```{r}
-supp = seq(0, 8, length.out = 100)
+supp = seq(0.1, 8, length.out = 100)
 step.const = function(x) {
   if(x>0 & x <= 2) {
     1
@@ -228,7 +228,7 @@ step.const = function(x) {
   } else if(x>4 & x  <= 6) {
     3
   } else {
-    1
+    1.75
   }
 }
 
