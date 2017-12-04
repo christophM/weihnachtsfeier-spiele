@@ -11,42 +11,45 @@ library('knitr')
 opts_chunk$set(echo = FALSE, warning = FALSE)
 ```
 
-# Wir suchen Versuchspersonen (2 Teams)
-
 ## 
 ![](./images/computer.png)
 
 ## 
 ![](./images/human.jpg)
 
-## {.emphasizedabit}
+
+## {.emphasizedabit .flexbox .vcenter}
 
 Der Maximum Bauchgefühl Schätzer
 
+# Wir brauchen Versuchspersonen
 
-# Test 1: Wie viel Prozent der Symbole sind rote Dreiecke?
+
+# Test 1: Punkteschätzer. Wie viele Prozent der Symbole sind rote Dreiecke?
 
 
 ```{r}
-
-simulate.points = function(n, p, seed = 42){
-  set.seed(seed)
+set.seed(42)
+simulate.points = function(n, p){
   data.frame(
     x = runif(n),
     y = runif(n),
     color = factor(sample(c(0,1), size = n, replace=TRUE, prob = c(1-p, p))))
 }
-plot.points = function(points, size = 5, random.size = FALSE){
+plot.points = function(points, size = 5, random.size = FALSE, flip = FALSE){
   
   if(random.size){
     size = rpois(nrow(points), 7)
   } 
   points$size = size
-
+  
+  colors = c('blue', 'red')
+  if(flip) colors = rev(colors)
+  
   p = ggplot(points) + 
     geom_point(aes(x=x, y=y, color = color, shape= color, size = size)) + 
     theme_void() + 
-    scale_color_manual(guide = 'none', values = c('blue', 'red')) + 
+    scale_color_manual(guide = 'none', values = colors) + 
     scale_shape_discrete(guide = 'none') + 
     scale_size_identity(guide='none')
   return(p)
@@ -56,9 +59,18 @@ points = simulate.points(20, 0.1)
 ```
 
 
-## Beispiel:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+
+## Beispiel
 ```{r}
 # simulate 
+plot.points(points)
+```
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort:  `r sprintf("%.0f%s", 100 * mean(points$color == 1), '%') `
+```{r}
 plot.points(points)
 ```
 
@@ -109,7 +121,7 @@ plot.points(points)
 
 ## Runde 4
 ```{r}
-points = simulate.points(1000, 0.94)
+points = simulate.points(1000, 0.67)
 plot.points(points)
 ```
 
@@ -137,6 +149,23 @@ Die Zeit ist um!
 ```{r}
 p
 ```
+
+
+## Runde 6
+```{r}
+points = simulate.points(50, 0.77)
+p = plot.points(points,random.size = TRUE, flip = TRUE)
+p
+```
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: 0%
+```{r}
+p
+```
+
 
 
 # Test 2: Malen nach Tönen
@@ -365,18 +394,13 @@ Auf wieviele Einwohner kommt ein Hund?
 
 <font size="26"> 44 </font>
 
-# Test 4: Wie lautet der höchste Wert?
+# Test 4: Maximum Schätzer
 
 ## Finde das Maximum 
 
-Wir ziehen 5 Zahlen zwischen 0 und unbekanntem Höchstwert.
+Wir ziehen 5 Zahlen zwischen 0 und einem unbekanntem Höchstwert.
 
-Aufgabe: Versucht herauszufinden was der höchste Wert ist. 
-
-Beispiel: Unbekannter höchster Wert ist 10. 
-
-Gezeigte Zahlen: 1, 6, 2, 3, 8
-
+Aufgabe: Versucht herauszufinden was der unbekannte Höchstwert ist.
 
 ```{r}
 set.seed(42)
@@ -387,60 +411,12 @@ get.max.game.numbers = function(maxim, min=0, n=5, sort.numbers=FALSE){
    }
    numbers
 }
-maxim = 15
-numbers =get.max.game.numbers(maxim)
-```
-
-# `r numbers[1]`
-# `r numbers[2]`
-# `r numbers[3]`
-# `r numbers[4]`
-# `r numbers[5]`
-
-## {.emphasized .flexbox .vcenter}
-Die Zeit ist um!
-
-## Antwort: `r maxim`, die Anzahl an Sektflaschen für die Weihnachtsfeier
-
-- `r numbers[1]`
-- `r numbers[2]`
-- `r numbers[3]`
-- `r numbers[4]`
-- `r numbers[5]`
-
-## Finde das Maximum {.build}
-
-```{r}
-maxim = 60 
+maxim = 10
 numbers =get.max.game.numbers(maxim)
 ```
 
 
-# `r numbers[1]`
-# `r numbers[2]`
-# `r numbers[3]`
-# `r numbers[4]`
-# `r numbers[5]`
-
-
-
-## {.emphasized .flexbox .vcenter}
-Die Zeit ist um!
-
-## Antwort: `r maxim`, die Anzahl an Brezn für die Feier
-
-- `r numbers[1]`
-- `r numbers[2]`
-- `r numbers[3]`
-- `r numbers[4]`
-- `r numbers[5]`
-
-## Finde das Maximum
-
-```{r}
-maxim = 2017
-numbers =get.max.game.numbers(maxim)
-```
+## Beispiel 
 
 # `r numbers[1]`
 # `r numbers[2]`
@@ -453,12 +429,76 @@ Die Zeit ist um!
 
 ## Antwort: `r maxim`
 
-- `r numbers[1]`
-- `r numbers[2]`
-- `r numbers[3]`
-- `r numbers[4]`
-- `r numbers[5]`
+`r paste(numbers, collapse=', ')`
 
+
+## Runde 1
+```{r}
+maxim = 15 
+numbers = get.max.game.numbers(maxim)
+```
+
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: `r maxim` bzw. die Anzahl an Sektflaschen für die Weihnachtsfeier
+
+`r paste(numbers, collapse=', ')`
+
+
+## Runde 2
+
+```{r}
+maxim = 60 
+numbers = get.max.game.numbers(maxim)
+```
+
+
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
+
+
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: `r maxim` bzw. die Anzahl an Brezn für die Feier
+
+`r paste(numbers, collapse=', ')`
+
+
+## Runde 3
+
+```{r}
+maxim = 33
+numbers =get.max.game.numbers(maxim)
+```
+
+# `r numbers[1]`
+# `r numbers[2]`
+# `r numbers[3]`
+# `r numbers[4]`
+# `r numbers[5]`
+
+## {.emphasized .flexbox .vcenter}
+Die Zeit ist um!
+
+## Antwort: `r maxim` bzw. die Hausnummer des Instituts
+
+`r paste(numbers, collapse=', ')`
+
+
+
+## Runde 4
 
 ```{r}
 maxim = 5000000L
@@ -474,15 +514,15 @@ numbers =get.max.game.numbers(maxim)
 ## {.emphasized .flexbox .vcenter}
 Die Zeit ist um!
 
-## Antwort: `r maxim`, Leberkäse in Milligram
+## Antwort: `r maxim` bzw. Leberkäse (in Milligram) heute im Statistik Institut
 
-- `r numbers[1]`
-- `r numbers[2]`
-- `r numbers[3]`
-- `r numbers[4]`
-- `r numbers[5]`
+`r paste(numbers, collapse=', ')`
 
 
+# Auswertung läuft
 
-#  {.emphasized .flexbox .vcenter}
-Menschen sind zu langsam. 
+##  {.emphasized .flexbox .vcenter}
+
+BILD
+
+
