@@ -2,12 +2,12 @@ library(tuneR)
 # Example
 supp = seq(1,7, length.out = 100)
 
-ex = (seq(1, 7, length.out = 100)^1.25*sin(seq(1, 7, length.out = 100)*1.5) -
-  (seq(1,7,length.out = 100)-1)^1.05*2) * .02 + 2.32
+ex = ((seq(1, 7, length.out = 100)^1.25*sin(seq(1, 7, length.out = 100)*1.5) -
+  (seq(1,7,length.out = 100)-1)^1.05*2) * .03 + .72)*.5
 
 # plot(supp, ex, type = "l")
 
-list = lapply(ex, function(x) sine(x*440+220, duration = .1, xunit = "time"))
+list = lapply(ex, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 ex.wav = do.call(bind, list)
 
@@ -21,7 +21,7 @@ st.norm.dens = dnorm(supp)
 
 plot(supp, st.norm.dens, type = "l")
 
-list = lapply(st.norm.dens, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(st.norm.dens, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 st.norm.wav = do.call(bind, list)
 
@@ -34,7 +34,7 @@ beta.dens = dbeta(supp, 2, 2)
 
 plot(supp, beta.dens, type = "l")
 
-list = lapply(beta.dens, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(beta.dens, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 beta.wav = do.call(bind, list)
 
@@ -46,14 +46,14 @@ gamma.dens = dgamma(supp, 2, 1)
 
 plot(supp, gamma.dens, type = "l")
 
-list = lapply(gamma.dens, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(gamma.dens, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 gamma.wav = do.call(bind, list)
 
 writeWave(gamma.wav, "./gamma_dens.wav")
 
 # Stepwise constant
-supp = seq(0, 8, length.out = 100)
+supp = seq(0.001, 8, length.out = 100)
 step.const = function(x) {
   if(x>0 & x <= 2) {
     1
@@ -71,7 +71,7 @@ stepconst = sapply(supp, step.const)
 
 plot(supp, stepconst, type = "l")
 
-list = lapply(stepconst, function(x) sine(x*440, duration = .1, xunit = "time"))
+list = lapply(stepconst, function(x) sine(x*440, duration = .1, xunit = "time", stereo = TRUE))
 
 step.const.wav = do.call(bind, list)
 
@@ -85,7 +85,7 @@ sine.fun =  sin(4*supp)
 
 plot(supp, sine.fun, type = "l")
 
-list = lapply(sine.fun, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(sine.fun, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 sine.wav = do.call(bind, list)
 
@@ -115,7 +115,7 @@ supp = seq(0, 4.75, length.out = 100)
 
 lmu = sapply(supp, lmu.func) / 2
 
-list = lapply(lmu, function(x) sine(x*440+440, duration = .1, xunit = "time"))
+list = lapply(lmu, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
 
 lmu.wav = do.call(bind, list)
 
