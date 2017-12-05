@@ -85,7 +85,7 @@ sine.fun =  sin(4*supp)
 
 plot(supp, sine.fun, type = "l")
 
-list = lapply(sine.fun, function(x) sine(x*440+440, duration = .1, xunit = "time", stereo = TRUE))
+list = lapply(sine.fun, function(x) sine(x*440+540, duration = .1, xunit = "time", stereo = TRUE))
 
 sine.wav = do.call(bind, list)
 
