@@ -357,44 +357,44 @@ Your browser does not support the audio element.
 # Test 3: WiSo München
 ## Frage 1 {.flexbox .vcenter}
 
-Wie viele Einwohner hat München zum Stichtag 31.12.2016?
+<font size="18"> Wie viele Einwohner hatte München zum Stichtag 31.12.2016? </font>
 
-<img src="http://res.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/th/panorama-marienplatz-620/document/panorama-marienplatz-620.jpg" alt="Drawing" style="width: 600px;"/>
+<img src="http://res.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/th/panorama-marienplatz-620/document/panorama-marienplatz-620.jpg" alt="Drawing" style="width: 550px;"/>
 
-## Frage 1 {.flexbox .vcenter}
+## {.emphasized .flexbox .vcenter}
 
-<font size="26">1.542.860</font>
+1.542.860
 
 ## Frage 2 {.flexbox .vcenter}
 
-Wie viele MünchnerInnen waren Ende 2016 älter als 100 Jahre?
+<font size="18"> Wie viele MünchnerInnen waren Ende 2016 älter als 100 Jahre? </font>
 
 <img src = "./alter_muenchen.png" alt="Drawing"/>
 
-## Frage 2 {.flexbox .vcenter}
+## {.emphasized .flexbox .vcenter}
 
-<font size="26">367</font>
+367
 
 ## Frage 3 {.flexbox .vcenter}
 
-Welches ist der flächenmäßig größte Stadtteil Münchens?
+<font size="18"> Welches ist der flächenmäßig größte Stadtteil Münchens? </font>
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Aubing_Wappen_Feuerwehr.jpg" alt="Drawing" style="width: 600px;"/>
 
-## Frage 3 {.flexbox .vcenter}
+## {.emphasized .flexbox .vcenter}
 
-<font size="26">Aubing - Lochhausen - Langwied </font>
+Aubing - Lochhausen - Langwied
 
 
 ## Frage 4 {.flexbox .vcenter}
 
-Auf wieviele Einwohner kommt ein Hund?
+<font size="18">  Auf wieviele Einwohner kommt ein Hund? </font>
 
 <img src="http://static4.businessinsider.de/image/56c4e795dd0895e11c8b469c-1200-1013/bulldog-after.jpg" alt="Drawing" width = "400" height = "338"/>
 
-## Frage 4 {.flexbox .vcenter}
+## {.emphasized .flexbox .vcenter}
 
-<font size="26"> 44 </font>
+44 
 
 # Test 4: Maximum Schätzer
 
@@ -478,7 +478,7 @@ Die Zeit ist um!
 `r paste(numbers, collapse=', ')`
 
 
-## Runde 3
+## Runde 3 
 
 ```{r}
 maxim = 33
