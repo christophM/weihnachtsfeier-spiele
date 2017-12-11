@@ -2,12 +2,23 @@
    font-size: 4.2em;
 }
 
+.maxestimator {
+  background: red;
+  font-size: 4.2em;
+}
+
 
 .emphasizedabit {
    font-size: 2.2em;
 }
 
+.emphasizedalot {
+   font-size: 7.2em;
+}
+
 slides > slide:not(.nobackground):after {
   content: '';
 }
+
+
 
