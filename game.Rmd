@@ -174,7 +174,20 @@ p
 
 # Test 2: Malen nach Tönen
 
+
+## Beispiel 
+
+```{r}
+plot(c(1,10),c(-25,2), col = "white", xaxt = "n", yaxt = "n", xlab = "Zeit", ylab = "Tonhöhe",
+    bty = "l", mgp=c(1,1,0))
+```
+<audio controls>
+  <source src="density_as_sound/st_norm_dens.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio>
+
 ## Beispiel
+
 ```{r}
 supp = seq(-4, 4, length.out = 100)
 st.norm.dens = dnorm(supp)
